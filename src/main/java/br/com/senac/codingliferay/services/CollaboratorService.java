@@ -38,8 +38,8 @@ public class CollaboratorService {
         return collaboratorRepository.findByName(collaboratorName.toUpperCase());
     }
 
-    public CollaboratorModel getByName(CollaboratorModel collaboratorModel) {
-        return collaboratorRepository.findByName(collaboratorModel.getName().toUpperCase());
+    public CollaboratorModel getById(Long id) {
+        return collaboratorRepository.findById(id).get();
     }
     //endregion
 

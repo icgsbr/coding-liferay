@@ -38,8 +38,8 @@ public class InstitutionService {
         return institutionRepository.findByName(institutionName.toUpperCase());
     }
 
-    public InstitutionModel getByName(InstitutionModel institutionModel) {
-        return institutionRepository.findByName(institutionModel.getName().toUpperCase());
+    public InstitutionModel getById(Long id) {
+        return institutionRepository.findById(id).get();
     }
     //endregion
 

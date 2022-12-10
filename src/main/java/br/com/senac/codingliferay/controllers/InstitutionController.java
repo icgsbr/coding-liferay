@@ -19,10 +19,14 @@ public class InstitutionController {
     //endregion
 
     //region POST
-    @PostMapping("institution/register")
+    @PostMapping("institution/post/register")
     @ApiOperation(value = "Returns ")
     public ResponseEntity<Object> register(@RequestBody InstitutionDTO institutionDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(institutionService.save(institutionDTO));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(institutionService.save(institutionDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 
@@ -30,28 +34,43 @@ public class InstitutionController {
     @GetMapping("institution/get/all")
     @ApiOperation(value = "Returns all institutions registered on the database")
     public ResponseEntity<Object> all() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getAll());
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("institution/get/name")
     @ApiOperation(value = "Returns a institution with the same given name")
     public ResponseEntity<Object> name(@RequestBody String institutionName) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getByName(institutionName));
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getByName(institutionName));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
-    // TODO: CHANGE LOGIC TO GET BY ID
-//    @GetMapping("name")
-//    @ApiOperation(value = "Returns a institution with the same given name")
-//    public ResponseEntity<Object> name(@RequestBody InstitutionModel institutionModel) {
-//        return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getByName(institutionModel));
-//    }
+    @GetMapping("institution/get/id")
+    @ApiOperation(value = "Returns a institution with the same given id")
+    public ResponseEntity<Object> name(@RequestBody Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
     //endregion
 
     //region PUT
-    @PutMapping("institution/update")
+    @PutMapping("institution/put/update")
     @ApiOperation(value = "Update institution")
     public ResponseEntity<Object> update(@RequestBody Long id, @RequestBody InstitutionDTO institutionDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(institutionService.updateFullInstitution(id, institutionDTO));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(institutionService.updateFullInstitution(id, institutionDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 
@@ -59,22 +78,34 @@ public class InstitutionController {
     @DeleteMapping("institution/delete/all")
     @ApiOperation(value = "Delete all institutions registered on the database")
     public ResponseEntity<Object> deleteAll() {
-        institutionService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body("All institution registry successfully erased");
+        try {
+            institutionService.deleteAll();
+            return ResponseEntity.status(HttpStatus.OK).body("All institution registry successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("institution/delete/name")
     @ApiOperation(value = "Delete institution with the same given name")
     public ResponseEntity<Object> delete(@RequestBody String institutionName) {
-        institutionService.delete(institutionName);
-        return ResponseEntity.status(HttpStatus.OK).body("Institution successfully erased");
+        try {
+            institutionService.delete(institutionName);
+            return ResponseEntity.status(HttpStatus.OK).body("Institution successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("institution/delete")
     @ApiOperation(value = "Delete institution")
     public ResponseEntity<Object> delete(@RequestBody InstitutionModel institutionModel) {
-        institutionService.delete(institutionModel);
-        return ResponseEntity.status(HttpStatus.OK).body("Institution successfully erased");
+        try {
+            institutionService.delete(institutionModel);
+            return ResponseEntity.status(HttpStatus.OK).body("Institution successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 }
