@@ -22,7 +22,11 @@ public class FormController {
     @PostMapping("form/post/register")
     @ApiOperation(value = "Register a new Form on the database")
     public ResponseEntity<Object> register(@RequestBody FormDTO formDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(formService.save(formDTO));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(formService.save(formDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 
@@ -30,13 +34,21 @@ public class FormController {
     @GetMapping("form/get/all")
     @ApiOperation(value= "Returns all forms registered on the database")
     public ResponseEntity<Object> getAll() {
-        return ResponseEntity.status(HttpStatus.FOUND).body(formService.getAll());
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(formService.getAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("form/get/id")
     @ApiOperation(value = "Returns a form with the same given id")
     public ResponseEntity<Object> id(@RequestBody Long id) {
-        return ResponseEntity.status(HttpStatus.FOUND).body(formService.getById(id));
+        try {
+            return ResponseEntity.status(HttpStatus.FOUND).body(formService.getById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
     //endregion
 
@@ -44,7 +56,11 @@ public class FormController {
     @PutMapping("form/put/update")
     @ApiOperation(value = "Update Form")
     public ResponseEntity<Object> update(@RequestBody Long id, @RequestBody FormDTO formDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(formService.updateAll(id, formDTO));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(formService.updateAll(id, formDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 
@@ -52,15 +68,23 @@ public class FormController {
     @DeleteMapping("form/delete/all")
     @ApiOperation(value = "Delete all forms registered on the database")
     public ResponseEntity<Object> deleteAll() {
-        formService.deleteAll();
-        return ResponseEntity.status(HttpStatus.OK).body("All institution registry successfully erased");
+        try {
+            formService.deleteAll();
+            return ResponseEntity.status(HttpStatus.OK).body("All institution registry successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("form/delete")
     @ApiOperation(value = "Delete form")
     public ResponseEntity<Object> delete(@RequestBody FormModel formModel) {
-        formService.delete(formModel);
-        return ResponseEntity.status(HttpStatus.OK).body("Form successfully erased");
+        try {
+            formService.delete(formModel);
+            return ResponseEntity.status(HttpStatus.OK).body("Form successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
     //endregion
 }
