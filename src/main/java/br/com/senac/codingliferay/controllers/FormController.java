@@ -19,7 +19,7 @@ public class FormController {
     //endregion
 
     //region POST
-    @PostMapping("form/register")
+    @PostMapping("form/post/register")
     @ApiOperation(value = "Register a new Form on the database")
     public ResponseEntity<Object> register(@RequestBody FormDTO formDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(formService.save(formDTO));
@@ -41,7 +41,7 @@ public class FormController {
     //endregion
 
     //region PUT
-    @PutMapping("form/update")
+    @PutMapping("form/put/update")
     @ApiOperation(value = "Update Form")
     public ResponseEntity<Object> update(@RequestBody Long id, @RequestBody FormDTO formDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(formService.updateAll(id, formDTO));

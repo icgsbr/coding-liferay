@@ -19,7 +19,7 @@ public class InstitutionController {
     //endregion
 
     //region POST
-    @PostMapping("institution/register")
+    @PostMapping("institution/post/register")
     @ApiOperation(value = "Returns ")
     public ResponseEntity<Object> register(@RequestBody InstitutionDTO institutionDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(institutionService.save(institutionDTO));
@@ -39,16 +39,15 @@ public class InstitutionController {
         return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getByName(institutionName));
     }
 
-    // TODO: CHANGE LOGIC TO GET BY ID
-//    @GetMapping("name")
-//    @ApiOperation(value = "Returns a institution with the same given name")
-//    public ResponseEntity<Object> name(@RequestBody InstitutionModel institutionModel) {
-//        return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getByName(institutionModel));
-//    }
+    @GetMapping("institution/get/id")
+    @ApiOperation(value = "Returns a institution with the same given id")
+    public ResponseEntity<Object> name(@RequestBody Long id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(institutionService.getById(id));
+    }
     //endregion
 
     //region PUT
-    @PutMapping("institution/update")
+    @PutMapping("institution/put/update")
     @ApiOperation(value = "Update institution")
     public ResponseEntity<Object> update(@RequestBody Long id, @RequestBody InstitutionDTO institutionDTO) {
         return ResponseEntity.status(HttpStatus.OK).body(institutionService.updateFullInstitution(id, institutionDTO));
