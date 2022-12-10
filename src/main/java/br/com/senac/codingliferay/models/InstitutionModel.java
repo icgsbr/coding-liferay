@@ -35,20 +35,16 @@ public class InstitutionModel {
     private String country;
 
     @Column(nullable = false)
-    private Long donationsReceived = 0L;
-
-    @Column(nullable = false)
     private LocalDateTime dateOfCreation = LocalDateTime.now();
     //endregion
 
     //region CONSTRUCTORS
-    public InstitutionModel(String name, String email, Long phoneNumber, String city, String state, Long donationsReceived) {
+    public InstitutionModel(String name, String email, Long phoneNumber, String city, String state) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
-        this.donationsReceived = donationsReceived;
         this.dateOfCreation = LocalDateTime.now();
     }
     //endregion
