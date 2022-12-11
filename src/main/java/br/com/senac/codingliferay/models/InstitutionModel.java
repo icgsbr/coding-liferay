@@ -39,12 +39,13 @@ public class InstitutionModel {
     //endregion
 
     //region CONSTRUCTORS
-    public InstitutionModel(String name, String email, Long phoneNumber, String city, String state) {
+    public InstitutionModel(String name, String email, Long phoneNumber, String city, String state, String country) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.city = city;
         this.state = state;
+        this.country = country;
         this.dateOfCreation = LocalDateTime.now();
     }
     //endregion
