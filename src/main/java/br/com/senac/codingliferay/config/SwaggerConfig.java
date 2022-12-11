@@ -34,7 +34,11 @@ public class SwaggerConfig {
                 "REST API developed for college project on SENAC",
                 "1.0",
                 "Terms of Service",
-                new Contact("Igor Costa Gomes Souza", "https://github.com/icgsbr", "igorcostagomessouza@gmail.com"),
+                new Contact(
+                        "Igor Costa Gomes Souza",
+                        "https://github.com/icgsbr",
+                        "igorcostagomessouza@gmail.com"
+                ),
                 "Apache License Version 2.0",
                 "https://www.apache.org/license.html",
                 new ArrayList<>()
