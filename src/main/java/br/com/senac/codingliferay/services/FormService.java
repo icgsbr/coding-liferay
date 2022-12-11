@@ -90,7 +90,8 @@ public class FormService {
                 formDTO.getEmailInstitution(),
                 formDTO.getPhoneNumberInstitution(),
                 formDTO.getCityInstitution(),
-                formDTO.getStateInstitution()
+                formDTO.getStateInstitution(),
+                formDTO.getCountryInstitution()
         );
 
         return institutionRepository.save(institutionModel);
