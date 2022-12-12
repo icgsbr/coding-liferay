@@ -139,5 +139,20 @@ public class FormController {
                     .body(e.getMessage());
         }
     }
+
+    @DeleteMapping("form/delete/{id}")
+    @ApiOperation(value = "Delete form")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        try {
+            formService.delete(id);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("Form successfully erased");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
+        }
+    }
     //endregion
 }
