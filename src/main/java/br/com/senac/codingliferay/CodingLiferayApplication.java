@@ -19,7 +19,10 @@ public class CodingLiferayApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (collaboratorService.getAll().isEmpty()) {
-            CollaboratorDTO amanda = new CollaboratorDTO("AMANDA GOUVEIA", "SENIOR QA");
+            CollaboratorDTO amanda = new CollaboratorDTO(
+                    "AMANDA GOUVEIA",
+                    "SENIOR QA"
+            );
             collaboratorService.save(amanda);
         }
     }

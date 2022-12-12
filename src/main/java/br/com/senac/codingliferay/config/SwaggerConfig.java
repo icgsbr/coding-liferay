@@ -22,7 +22,10 @@ public class SwaggerConfig {
     public Docket liferayEvpApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.senac.codingliferay"))
+                .apis(
+                        RequestHandlerSelectors
+                                .basePackage("br.com.senac.codingliferay")
+                )
                 .paths(regex("/api.*"))
                 .build()
                 .apiInfo(metaInfo());

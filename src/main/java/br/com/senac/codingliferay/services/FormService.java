@@ -27,16 +27,40 @@ public class FormService {
     @Transactional
     @Modifying
     public FormModel save(FormDTO formDTO) {
-        formDTO.setNameInstitution(formDTO.getNameInstitution().trim().toUpperCase());
-        formDTO.setCountryInstitution(formDTO.getCountryInstitution().trim().toUpperCase());
-        formDTO.setStateInstitution(formDTO.getStateInstitution().trim().toUpperCase());
-        formDTO.setCityInstitution(formDTO.getCityInstitution().trim().toUpperCase());
+        formDTO.setNameInstitution(
+                formDTO
+                        .getNameInstitution()
+                        .trim()
+                        .toUpperCase()
+        );
+        formDTO.setCountryInstitution(
+                formDTO
+                        .getCountryInstitution()
+                        .trim()
+                        .toUpperCase()
+        );
+        formDTO.setStateInstitution(
+                formDTO
+                        .getStateInstitution()
+                        .trim()
+                        .toUpperCase()
+        );
+        formDTO.setCityInstitution(
+                formDTO
+                        .getCityInstitution()
+                        .trim()
+                        .toUpperCase()
+        );
 
         FormModel formModel = new FormModel();
         BeanUtils.copyProperties(formDTO, formModel);
 
         formModel.setInstitution(saveOrGetInstitution(formDTO));
-        formModel.setCollaborator(formRepository.getCollaborator("AMANDA GOUVEIA").get());
+        formModel.setCollaborator(
+                formRepository
+                        .getCollaborator("AMANDA GOUVEIA")
+                        .get()
+        );
 
         return formRepository.save(formModel);
     }

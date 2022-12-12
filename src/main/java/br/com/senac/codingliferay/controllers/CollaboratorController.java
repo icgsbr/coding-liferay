@@ -43,7 +43,9 @@ public class CollaboratorController {
 
     //region GET
     @GetMapping("collaborator/get/all")
-    @ApiOperation(value = "Returns all collaborators registered on the database")
+    @ApiOperation(
+            value = "Returns all collaborators registered on the database"
+    )
     public ResponseEntity<Object> all() {
         try {
             return ResponseEntity
@@ -88,11 +90,20 @@ public class CollaboratorController {
     //region PUT
     @PutMapping("collaborator/put/update")
     @ApiOperation(value = "Update Collaborator")
-    public ResponseEntity<Object> updateAll(@RequestBody Long id, @RequestBody CollaboratorDTO collaboratorDTO ) {
+    public ResponseEntity<Object> updateAll(
+            @RequestBody Long id,
+            @RequestBody CollaboratorDTO collaboratorDTO
+    ) {
         try {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(collaboratorService.updateFullCollaborator(id, collaboratorDTO));
+                    .body(
+                            collaboratorService
+                                    .updateFullCollaborator(
+                                            id,
+                                            collaboratorDTO
+                                    )
+                    );
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
