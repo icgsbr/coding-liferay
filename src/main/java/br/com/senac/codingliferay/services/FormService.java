@@ -96,5 +96,13 @@ public class FormService {
 
         return institutionRepository.save(institutionModel);
     }
+
+    public Double getAmountDonated() {
+        try {
+            return formRepository.getAmountDonated();
+        } catch (Exception e) {
+            return 0.0;
+        }
+    }
     //endregion
 }

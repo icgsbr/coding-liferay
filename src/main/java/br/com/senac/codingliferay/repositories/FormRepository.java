@@ -17,4 +17,7 @@ public interface FormRepository extends JpaRepository<FormModel, Long> {
 
     @Query(value = "select collaborator from CollaboratorModel collaborator where collaborator.name = :name")
     Optional<CollaboratorModel> getCollaborator(@Param(value = "name") String name);
+
+    @Query(value = "select sum(form.value) from FormModel form")
+    Double getAmountDonated();
 }

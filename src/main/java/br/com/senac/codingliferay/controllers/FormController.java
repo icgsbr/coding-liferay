@@ -69,6 +69,20 @@ public class FormController {
                     .body(e.getMessage());
         }
     }
+
+    @GetMapping("form/get/amount")
+    @ApiOperation(value = "Returns the donations total sum")
+    public ResponseEntity<Object> amount() {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.FOUND)
+                    .body(formService.getAmountDonated());
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(0);
+        }
+    }
     //endregion
 
     //region PUT
