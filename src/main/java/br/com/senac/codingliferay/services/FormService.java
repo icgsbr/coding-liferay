@@ -124,6 +124,12 @@ public class FormService {
     public void delete(FormModel formModel) {
         formRepository.delete(formModel);
     }
+
+    @Transactional
+    @Modifying
+    public void delete(Long id) {
+        formRepository.delete(formRepository.findById(id).get());
+    }
     //endregion
 
     //region ANOTHER METHODS
