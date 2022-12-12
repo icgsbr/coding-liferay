@@ -1,6 +1,7 @@
 package br.com.senac.codingliferay.services;
 
 import br.com.senac.codingliferay.dtos.FormDTO;
+import br.com.senac.codingliferay.dtos.InstitutionDTO;
 import br.com.senac.codingliferay.models.FormModel;
 import br.com.senac.codingliferay.models.InstitutionModel;
 import br.com.senac.codingliferay.repositories.FormRepository;
@@ -78,6 +79,17 @@ public class FormService {
 
     //region PUT
     public FormModel updateAll(Long id, FormDTO formDTO) {
+        InstitutionDTO institutionDTO = new InstitutionDTO(
+                formDTO.getNameInstitution().trim().toUpperCase(),
+                formDTO.getEmailInstitution(),
+                formDTO.getPhoneNumberInstitution(),
+                formDTO.getCityInstitution().trim().toUpperCase(),
+                formDTO.getStateInstitution().trim().toUpperCase(),
+                formDTO.getCountryInstitution().trim().toUpperCase()
+        );
+
+        InstitutionModel institutionModel = saveOrGetInstitution(institutionDTO);
+
         formDTO.setNameInstitution(formDTO.getNameInstitution().trim().toUpperCase());
         formDTO.setCountryInstitution(formDTO.getCountryInstitution().trim().toUpperCase());
         formDTO.setStateInstitution(formDTO.getStateInstitution().trim().toUpperCase());
@@ -85,6 +97,7 @@ public class FormService {
 
         FormModel formModelToBeChanged = formRepository.findById(id).get();
         BeanUtils.copyProperties(formDTO, formModelToBeChanged);
+        formModelToBeChanged.setInstitution(institutionModel);
         return formModelToBeChanged;
     }
     //endregion
@@ -105,18 +118,29 @@ public class FormService {
 
     //region ANOTHER METHODS
     public InstitutionModel saveOrGetInstitution(FormDTO formDTO) {
-        if (formRepository.getInstitution(formDTO.getNameInstitution()).isPresent()) {
-            return formRepository.getInstitution(formDTO.getNameInstitution()).get();
+        if (formRepository.getInstitution(formDTO.getNameInstitution().trim().toUpperCase()).isPresent()) {
+            return formRepository.getInstitution(formDTO.getNameInstitution().trim().toUpperCase()).get();
         }
 
         InstitutionModel institutionModel = new InstitutionModel(
-                formDTO.getNameInstitution(),
+                formDTO.getNameInstitution().trim().toUpperCase(),
                 formDTO.getEmailInstitution(),
                 formDTO.getPhoneNumberInstitution(),
-                formDTO.getCityInstitution(),
-                formDTO.getStateInstitution(),
-                formDTO.getCountryInstitution()
+                formDTO.getCityInstitution().trim().toUpperCase(),
+                formDTO.getStateInstitution().trim().toUpperCase(),
+                formDTO.getCountryInstitution().trim().toUpperCase()
         );
+
+        return institutionRepository.save(institutionModel);
+    }
+
+    public InstitutionModel saveOrGetInstitution(InstitutionDTO institutionDTO) {
+        if (formRepository.getInstitution(institutionDTO.getName().trim().toUpperCase()).isPresent()) {
+            return formRepository.getInstitution(institutionDTO.getName().trim().toUpperCase()).get();
+        }
+
+        InstitutionModel institutionModel = new InstitutionModel();
+        BeanUtils.copyProperties(institutionDTO, institutionModel);
 
         return institutionRepository.save(institutionModel);
     }
