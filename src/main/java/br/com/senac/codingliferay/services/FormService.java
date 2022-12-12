@@ -97,6 +97,9 @@ public class FormService {
 
         FormModel formModelToBeChanged = formRepository.findById(id).get();
         BeanUtils.copyProperties(formDTO, formModelToBeChanged);
+
+        formRepository.updateFormValue(formModelToBeChanged.getId(), formDTO.getValue());
+        formRepository.updateFormInstitution(formModelToBeChanged.getId(), institutionModel);
         formModelToBeChanged.setInstitution(institutionModel);
         return formModelToBeChanged;
     }

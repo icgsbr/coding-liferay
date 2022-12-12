@@ -49,9 +49,9 @@ public class FormController {
         }
     }
 
-    @GetMapping("form/get/id")
+    @GetMapping("form/get/{id}")
     @ApiOperation(value = "Returns a form with the same given id")
-    public ResponseEntity<Object> id(@RequestBody Long id) {
+    public ResponseEntity<Object> id(@PathVariable Long id) {
         try {
             return ResponseEntity
                     .status(HttpStatus.FOUND)
