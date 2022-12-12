@@ -1,5 +1,6 @@
 package br.com.senac.codingliferay.controllers;
 
+import br.com.senac.codingliferay.dtos.EditFormDTO;
 import br.com.senac.codingliferay.dtos.FormDTO;
 import br.com.senac.codingliferay.models.FormModel;
 import br.com.senac.codingliferay.services.FormService;
@@ -86,6 +87,20 @@ public class FormController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(formService.updateAll(id, formDTO));
+        } catch (Exception e) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PutMapping("form/put/update/lean/{id}")
+    @ApiOperation(value = "Update Form")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody EditFormDTO editFormDTO) {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(formService.updateAll(id, editFormDTO));
         } catch (Exception e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)

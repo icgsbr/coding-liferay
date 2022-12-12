@@ -1,5 +1,6 @@
 package br.com.senac.codingliferay.services;
 
+import br.com.senac.codingliferay.dtos.EditFormDTO;
 import br.com.senac.codingliferay.dtos.FormDTO;
 import br.com.senac.codingliferay.dtos.InstitutionDTO;
 import br.com.senac.codingliferay.models.FormModel;
@@ -102,6 +103,12 @@ public class FormService {
         formRepository.updateFormInstitution(formModelToBeChanged.getId(), institutionModel);
         formModelToBeChanged.setInstitution(institutionModel);
         return formModelToBeChanged;
+    }
+
+    public FormModel updateAll(Long id, EditFormDTO editFormDTO) {
+        formRepository.updateFormValue(id, editFormDTO.getValue());
+        formRepository.updateFormInstitution(id, institutionRepository.findByName(editFormDTO.getNameInstitution().trim().toUpperCase()));
+        return formRepository.findById(id).get();
     }
     //endregion
 
