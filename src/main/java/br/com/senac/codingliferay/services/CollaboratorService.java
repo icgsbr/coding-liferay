@@ -47,13 +47,16 @@ public class CollaboratorService {
     //endregion
 
     //region UPDATE
-    public CollaboratorModel updateFullCollaborator(Long id, CollaboratorDTO collaboratorDTO) {
-        // TODO: ANALYSE POSSIBILITY OF MAKING UPDATE QUERY INSTEAD THE FOLLOWING LOGIC
-
+    public CollaboratorModel updateFullCollaborator(
+            Long id,
+            CollaboratorDTO collaboratorDTO
+    ) {
         collaboratorDTO.setName(collaboratorDTO.getName().trim().toUpperCase());
         collaboratorDTO.setJobRole(collaboratorDTO.getJobRole().trim().toUpperCase());
 
-        CollaboratorModel collaboratorToBeChanged = collaboratorRepository.findById(id).get();
+        CollaboratorModel collaboratorToBeChanged = collaboratorRepository
+                .findById(id)
+                .get();
         BeanUtils.copyProperties(collaboratorDTO, collaboratorToBeChanged);
         return collaboratorToBeChanged;
     }
@@ -75,7 +78,11 @@ public class CollaboratorService {
     @Transactional
     @Modifying
     public void delete(String collaboratorName) {
-        collaboratorRepository.delete(getByName(collaboratorName.toUpperCase()));
+        collaboratorRepository.delete(
+                getByName(
+                        collaboratorName.toUpperCase()
+                )
+        );
     }
     //endregion
 }

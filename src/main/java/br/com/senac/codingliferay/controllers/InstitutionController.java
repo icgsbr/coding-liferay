@@ -134,7 +134,9 @@ public class InstitutionController {
 
     @DeleteMapping("institution/delete")
     @ApiOperation(value = "Delete institution")
-    public ResponseEntity<Object> delete(@RequestBody InstitutionModel institutionModel) {
+    public ResponseEntity<Object> delete(
+            @RequestBody InstitutionModel institutionModel
+    ) {
         try {
             institutionService.delete(institutionModel);
             return ResponseEntity

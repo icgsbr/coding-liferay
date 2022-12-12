@@ -22,10 +22,30 @@ public class InstitutionService {
     @Transactional
     @Modifying
     public InstitutionModel save(InstitutionDTO institutionDTO) {
-        institutionDTO.setName(institutionDTO.getName().trim().toUpperCase());
-        institutionDTO.setCountry(institutionDTO.getCountry().trim().toUpperCase());
-        institutionDTO.setState(institutionDTO.getState().trim().toUpperCase());
-        institutionDTO.setCity(institutionDTO.getCity().trim().toUpperCase());
+        institutionDTO.setName(
+                institutionDTO
+                        .getName()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setCountry(
+                institutionDTO
+                        .getCountry()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setState(
+                institutionDTO
+                        .getState()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setCity(
+                institutionDTO
+                        .getCity()
+                        .trim()
+                        .toUpperCase()
+        );
 
         InstitutionModel institutionModel = new InstitutionModel();
         BeanUtils.copyProperties(institutionDTO, institutionModel);
@@ -44,18 +64,38 @@ public class InstitutionService {
     }
 
     public InstitutionModel getById(Long id) {
-        return institutionRepository.findById(id).get();
+        return institutionRepository
+                .findById(id)
+                .get();
     }
     //endregion
 
     //region UPDATE
     public InstitutionModel updateFullInstitution(Long id, InstitutionDTO institutionDTO) {
-        // TODO: ANALYSE POSSIBILITY OF MAKING UPDATE QUERY INSTEAD THE FOLLOWING LOGIC
-
-        institutionDTO.setName(institutionDTO.getName().trim().toUpperCase());
-        institutionDTO.setCountry(institutionDTO.getCountry().trim().toUpperCase());
-        institutionDTO.setState(institutionDTO.getState().trim().toUpperCase());
-        institutionDTO.setCity(institutionDTO.getCity().trim().toUpperCase());
+        institutionDTO.setName(
+                institutionDTO
+                        .getName()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setCountry(
+                institutionDTO
+                        .getCountry()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setState(
+                institutionDTO
+                        .getState()
+                        .trim()
+                        .toUpperCase()
+        );
+        institutionDTO.setCity(
+                institutionDTO
+                        .getCity()
+                        .trim()
+                        .toUpperCase()
+        );
 
         InstitutionModel institutionToBeChanged = institutionRepository.findById(id).get();
         BeanUtils.copyProperties(institutionDTO, institutionToBeChanged);
